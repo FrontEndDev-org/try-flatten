@@ -28,11 +28,11 @@ describe('tryFlatten + syncFunction', () => {
       assertUndefined(res);
     } else {
       assertNull(err);
-      assertNumber(res);
+      assertUndefined(res);
     }
 
     expect(err?.message).toBe('1');
-    expect(res).toBe(null);
+    expect(res).toBeUndefined();
   });
 });
 
@@ -76,7 +76,7 @@ describe('tryFlatten + callbackFunction', () => {
     }
 
     expect(err?.message).toBe('1');
-    expect(res).toBe(null);
+    expect(res).toBeUndefined();
   });
 });
 
@@ -108,7 +108,7 @@ describe('tryFlatten + promiseLike', () => {
     }
 
     expect(err?.message).toBe('1');
-    expect(res).toBe(null);
+    expect(res).toBeUndefined();
   });
 });
 
