@@ -1,7 +1,7 @@
 {
   "name": "try-flatten",
   "version": "1.0.0",
-  "description": "✈ 类型安全的扁平化的 try-catch，支持同步函数、回调函数和 Promise",
+  "description": "✈ 类型安全的扁平化的 try-catch，支持同步函数、回调函数和 PromiseLike",
   "scripts": {
     "prepare": "husky install",
     "lint": "eslint src/**/*.ts test/**/*.ts && tsc --project tsconfig.json --noEmit",

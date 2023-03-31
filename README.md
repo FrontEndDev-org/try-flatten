@@ -1,6 +1,6 @@
 # try-flatten
 
-✈ 类型安全的扁平化的 try-catch，支持同步函数、回调函数和 Promise
+✈ 类型安全的扁平化的 try-catch，支持同步函数、回调函数和 PromiseLike
 
 [![code-review](https://github.com/FrontEndDev-org/try-flatten/actions/workflows/code-review.yml/badge.svg)](https://github.com/FrontEndDev-org/try-flatten/actions/workflows/code-review.yml)
 [![dependency-review](https://github.com/FrontEndDev-org/try-flatten/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/FrontEndDev-org/try-flatten/actions/workflows/dependency-review.yml)
