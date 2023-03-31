@@ -1,0 +1,78 @@
+{
+  "name": "try-flatten",
+  "version": "1.0.0",
+  "description": "✈ 类型安全的扁平化的 try-catch，支持同步函数、回调函数和 Promise",
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "eslint src/**/*.ts test/**/*.ts && tsc --project tsconfig.json --noEmit",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "build:types": "rm -rf dist-dts && tsc --project tsconfig.types.json",
+    "build:files": "rm -rf dist-cjs dist-mjs && rollup --config",
+    "build": "npm run build:types && npm run build:files"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "engineStrict": true,
+  "sideEffects": false,
+  "type": "module",
+  "module": "dist-mjs/index.mjs",
+  "main": "dist-cjs/index.cjs",
+  "types": "dist-dts/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist-mjs/index.mjs",
+      "require": "./dist-cjs/index.cjs",
+      "types": "./dist-dts/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist-cjs",
+    "dist-dts",
+    "dist-mjs"
+  ],
+  "keywords": [
+    "cloudcome",
+    "ydr.me",
+    "try",
+    "catch",
+    "finally",
+    "error",
+    "flat",
+    "flatten",
+    "promise",
+    "async",
+    "await",
+    "callback"
+  ],
+  "author": "云淡然 <hi@ydr.me> (https://ydr.me)",
+  "homepage": "https://github.com/FrontEndDev-org/try-flatten",
+  "repository": "https://github.com/FrontEndDev-org/try-flatten",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@commitlint/cli": "^17.4.4",
+    "@commitlint/config-conventional": "^17.4.4",
+    "@commitlint/types": "^17.4.4",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-replace": "^5.0.2",
+    "@rollup/plugin-typescript": "^11.0.0",
+    "@types/node": "^18.15.7",
+    "@types/prettier": "^2.7.2",
+    "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "@typescript-eslint/parser": "^5.55.0",
+    "@vitest/coverage-c8": "^0.29.3",
+    "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.7.0",
+    "eslint-define-config": "^1.16.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.0",
+    "prettier": "^2.8.4",
+    "rollup": "^3.19.1",
+    "typescript": "^5.0.2",
+    "vitest": "^0.29.3"
+  }
+}

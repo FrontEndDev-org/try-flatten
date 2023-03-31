@@ -1,0 +1,66 @@
+# 如果是开发合并请求到主干，则会根据约定式提交创建一个 releasePR，是一个新版本合并请求。
+# 如果是新版本合并请求合并到主干，则会触发版本发布到 npm/github 等仓库。
+
+name: release please
+
+on:
+  push:
+    branches:
+      - v*.x
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        id: release
+        with:
+          release-type: node
+          bump-minor-pre-major: true
+
+  test-coverage:
+    runs-on: ubuntu-latest
+    needs: release
+    if: needs.release.outputs.release_created
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-nvm
+      - run: npm ci
+      - run: npm run test:coverage
+      - uses: codacy/codacy-coverage-reporter-action@v1
+        with:
+          api-token: ${{ secrets.CODACY_API_TOKEN }}
+          coverage-reports: coverage/lcov.info
+
+  publish-npm:
+    runs-on: ubuntu-latest
+    needs: test-coverage
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-nvm
+      - run: npm ci
+      - run: npm run build
+      - uses: FrontEndDev-org/publish-node-package-action@v1
+        with:
+          target: npm
+          token: ${{ secrets.NPM_TOKEN }}
+      - uses: FrontEndDev-org/npm-mirror-sync-action@v1
+
+  publish-github:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    needs: test-coverage
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./.github/actions/setup-nvm
+      - run: npm ci
+      - run: npm run build
+      - uses: FrontEndDev-org/publish-node-package-action@v1
+        with:
+          target: github
