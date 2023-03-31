@@ -30,6 +30,6 @@ describe('tryPromiseFlatten', () => {
     }
 
     expect(err?.message).toBe('1');
-    expect(res).toBe(null);
+    expect(res).toBeUndefined();
   });
 });
