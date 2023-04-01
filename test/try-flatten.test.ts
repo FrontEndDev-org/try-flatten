@@ -111,19 +111,3 @@ describe('tryFlatten + promiseLike', () => {
     expect(res).toBeUndefined();
   });
 });
-
-test('', async () => {
-  const [err, res] = await tryFlatten(Promise.resolve(1));
-
-  // 只需要判断 err 是否存在即可
-  if (err) {
-    // 此处 err 类型为 Error，res 类型为 undefined
-    console.log(err);
-    console.log(res === undefined);
-    return;
-  }
-
-  // 此处 err 类型为 null，res 类型为 number
-  console.log(err);
-  console.log(res);
-});
