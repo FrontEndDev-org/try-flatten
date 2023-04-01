@@ -23,6 +23,7 @@ export default {
   ],
   plugins: [
     replace({
+      preventAssignment: true,
       'process.env.PKG_NAME': JSON.stringify(pkg.name),
       'process.env.PKG_VERSION': JSON.stringify(pkg.version),
     }),
