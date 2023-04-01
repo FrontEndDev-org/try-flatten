@@ -1,4 +1,4 @@
-export * from './const';
+export { pkgName, pkgVersion } from './const';
 export * from './normalize-error';
 export * from './try-sync-flatten';
 export * from './try-callback-flatten';
