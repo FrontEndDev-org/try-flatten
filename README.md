@@ -4,8 +4,8 @@
 
 [![code-review](https://github.com/FrontEndDev-org/try-flatten/actions/workflows/code-review.yml/badge.svg)](https://github.com/FrontEndDev-org/try-flatten/actions/workflows/code-review.yml)
 [![dependency-review](https://github.com/FrontEndDev-org/try-flatten/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/FrontEndDev-org/try-flatten/actions/workflows/dependency-review.yml)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/94927619d58d418f958ed74e16eaf5c5)](https://app.codacy.com/gh/FrontEndDev-org/try-flatten/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
-[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/94927619d58d418f958ed74e16eaf5c5)](https://app.codacy.com/gh/FrontEndDev-org/try-flatten/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/948a21cc839b431490dd8b8bf22628c3)](https://app.codacy.com/gh/FrontEndDev-org/try-flatten/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Coverage/948a21cc839b431490dd8b8bf22628c3)](https://app.codacy.com/gh/FrontEndDev-org/try-flatten/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
 ![npm](https://img.shields.io/npm/v/try-flatten)
 ![release](https://img.shields.io/github/v/release/FrontEndDev-org/try-flatten)
 ![license](https://img.shields.io/github/license/FrontEndDev-org/try-flatten)
@@ -22,11 +22,12 @@ try {
   // 块级作用域内赋值
   res = await somePromise;
 } catch (err) {
+  // 此处 err 类型为 unknown
   console.log(err);
   return;
 }
 
-// try-catch 块级作用域快使用该变量
+// try-catch 块级作用域外使用该变量
 // 因为 res 类型包含 undefined，所以还要加有值判断
 if (res) {
   console.log(res.prop);
@@ -41,7 +42,7 @@ const [err, res] = await somePromise;
 // 只需要判断 err 是否存在即可
 if (err) {
   // 此处 err 类型为 Error，res 类型为 undefined
-  console.log(err);
+  console.log(err instanceof Error);
   console.log(res === undefined);
   return;
 }
