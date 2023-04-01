@@ -6,9 +6,8 @@
 [![dependency-review](https://github.com/FrontEndDev-org/try-flatten/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/FrontEndDev-org/try-flatten/actions/workflows/dependency-review.yml)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/948a21cc839b431490dd8b8bf22628c3)](https://app.codacy.com/gh/FrontEndDev-org/try-flatten/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/948a21cc839b431490dd8b8bf22628c3)](https://app.codacy.com/gh/FrontEndDev-org/try-flatten/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
-![npm](https://img.shields.io/npm/v/try-flatten)
-![release](https://img.shields.io/github/v/release/FrontEndDev-org/try-flatten)
-![license](https://img.shields.io/github/license/FrontEndDev-org/try-flatten)
+[![npm](https://img.shields.io/npm/v/try-flatten)](https://npmjs.com/package/try-flatten)
+[![release](https://img.shields.io/github/v/release/FrontEndDev-org/try-flatten)](https://github.com/FrontEndDev-org/try-flatten/releases)
 
 # 为什么需要这个
 
