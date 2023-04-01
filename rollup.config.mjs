@@ -1,4 +1,3 @@
-import json from '@rollup/plugin-json';
 import replace from '@rollup/plugin-replace';
 import typescript from '@rollup/plugin-typescript';
 import pkg from './package.json' assert { type: 'json' };
@@ -23,7 +22,6 @@ export default {
     },
   ],
   plugins: [
-    json(),
     replace({
       'process.env.PKG_NAME': JSON.stringify(pkg.name),
       'process.env.PKG_VERSION': JSON.stringify(pkg.version),
