@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/FrontEndDev-org/try-flatten/compare/v1.0.1...v1.1.0) (2023-04-01)
+
+
+### Features
+
+* export name, version -&gt; pkgName, pkgVersion ([74a8c09](https://github.com/FrontEndDev-org/try-flatten/commit/74a8c09cb35973ff6683467e11c639bfa146c823))
+* 增加了版本号的导出 ([984343e](https://github.com/FrontEndDev-org/try-flatten/commit/984343e86970603c918847489343bec09506bcb7))
+
 ## [1.0.1](https://github.com/FrontEndDev-org/try-flatten/compare/v1.0.0...v1.0.1) (2023-04-01)
 
 
