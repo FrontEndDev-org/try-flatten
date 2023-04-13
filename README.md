@@ -66,7 +66,7 @@ if (res) {
 ## 用上 `try-flatten` 后
 
 ```ts
-const [err, res] = await wrappedByTryFlatten(somePromise);
+const [err, res] = await tryFlatten(somePromise);
 
 // 只需要判断 err 是否存在即可
 if (err) {
