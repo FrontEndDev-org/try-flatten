@@ -13,42 +13,72 @@
 
 ## try-catch 块级作用域带来的问题
 
+先看一段代码：
+
 ```ts
+const somePromise = Promise.resolve({ prop: 'value' });
+
+try {
+  // 块级作用域内赋值
+  // res类型推断为 {prop: string}
+  const res = await somePromise;
+  // 类型安全地使用 res
+  console.log(res.prop); // 'value'
+} catch (err) {
+  // 此处 err 类型为 unknown
+  console.log(err);
+}
+```
+
+但有些时候，我们需要将变量的声明提升到块级作用域外，比如：
+
+```ts
+const somePromise = Promise.resolve({ prop: 'value' });
+
 // 需要先在 try-catch 块级作用域外定义变量，此处还需要先声明类型
+// 由于只提升了声明，但没有提升赋值，需要捕捉期望的返回值类型，并联合 undefined
+type Result = typeof somePromise extends Promise<infer T> ? T : never;
 let res: Result | undefined;
 
 try {
   // 块级作用域内赋值
   res = await somePromise;
+  // 块级作用域内类型仍然安全
+  console.log(res.prop); // 'value'
 } catch (err) {
   // 此处 err 类型为 unknown
   console.log(err);
-  return;
 }
 
+// 其他操作...
+
 // try-catch 块级作用域外使用该变量
-// 因为 res 类型包含 undefined，所以还要加有值判断
+// 此处 res 类型包含 undefined，类型使用不安全
+console.log(res.prop); // TS18048: 'res' is possibly 'undefined'.
+// 所以还要加有值判断
 if (res) {
   console.log(res.prop);
 }
 ```
 
+可以看到，由于块级作用域的特性，导致 res 的类型被”污染“了， 使用 try-flatten 后，你将可以用一种“扁平化”的方式调用 try-catch, 不用为了类型安全写一些冗余代码。
+
 ## 用上 `try-flatten` 后
 
 ```ts
-const [err, res] = await somePromise;
+const [err, res] = await wrappedByTryFlatten(somePromise);
 
 // 只需要判断 err 是否存在即可
 if (err) {
   // 此处 err 类型为 Error，res 类型为 undefined
-  console.log(err instanceof Error);
-  console.log(res === undefined);
+  console.log(err instanceof Error); // true
+  console.log(res === undefined); // true
   return;
 }
 
 // 此处 err 类型为 null，res 类型为 Result
-console.log(err === null);
-console.log(res.prop);
+console.log(err === null); // true
+console.log(res.prop); // 'value'
 ```
 
 # 下载安装
