@@ -16,7 +16,6 @@
   },
   "engineStrict": true,
   "sideEffects": false,
-  "type": "module",
   "module": "dist-mjs/index.mjs",
   "main": "dist-cjs/index.cjs",
   "types": "dist-dts/index.d.ts",
