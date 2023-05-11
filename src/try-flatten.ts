@@ -1,6 +1,6 @@
-import { tryCallbackFlatten, CallbackFunction } from './try-callback-flatten';
+import { tryCallbackFlatten, type CallbackFunction } from './try-callback-flatten';
 import { tryPromiseFlatten } from './try-promise-flatten';
-import { trySyncFlatten, SyncFunction } from './try-sync-flatten';
+import { trySyncFlatten, type SyncFunction } from './try-sync-flatten';
 
 export type FlattenAble<T> = SyncFunction<T> | CallbackFunction<T> | PromiseLike<T>;
 

@@ -1,5 +1,5 @@
 import { describe, expect, test } from 'vitest';
-import { CallbackFunction, tryCallbackFlatten } from '../src';
+import { type CallbackFunction, tryCallbackFlatten } from '../src';
 import { assertError, assertNull, assertNumber, assertUndefined } from './helpers';
 
 describe('tryCallbackFlatten', () => {
