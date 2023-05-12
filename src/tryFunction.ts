@@ -1,8 +1,9 @@
 import { normalizeError } from './normalize-error';
+import type { FlattenReturn } from './types/return';
 
 export type SyncFunction<T> = () => T;
 
-export function trySyncFlatten<T>(syncFn: () => T): readonly [null, T] | readonly [Error, undefined] {
+export function tryFunction<T>(syncFn: () => T): FlattenReturn<T> {
   try {
     return [null, syncFn()] as const;
   } catch (err) {

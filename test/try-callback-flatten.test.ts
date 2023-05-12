@@ -1,15 +1,16 @@
 import { describe, expect, test } from 'vitest';
-import { type CallbackFunction, tryCallbackFlatten } from '../src';
+import type { CallbackFunction0, CallbackFunction1, CallbackFunction2 } from '../src';
+import { tryCallback } from '../src';
 import { assertError, assertNull, assertNumber, assertUndefined } from './helpers';
 
-describe('tryCallbackFlatten', () => {
+describe('tryCallbackFlatten 0', () => {
   test('resolved', async () => {
-    const callbackFunction: CallbackFunction<number> = (callback) => {
+    const callbackFunction: CallbackFunction0<number> = (callback) => {
       setTimeout(() => {
         callback(null, 1);
       });
     };
-    const [err, res] = await tryCallbackFlatten(callbackFunction);
+    const [err, res] = await tryCallback(callbackFunction);
 
     if (err) {
       assertError(err);
@@ -24,14 +25,102 @@ describe('tryCallbackFlatten', () => {
   });
 
   test('rejected', async () => {
-    const callbackFunction: CallbackFunction<number> = (callback) => {
+    const callbackFunction: CallbackFunction0<number> = (callback) => {
       setTimeout(() => {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         callback(new Error('1'));
       });
     };
-    const [err, res] = await tryCallbackFlatten(callbackFunction);
+    const [err, res] = await tryCallback(callbackFunction);
+
+    if (err) {
+      assertError(err);
+      assertUndefined(res);
+    } else {
+      assertNull(err);
+      assertNumber(res);
+    }
+
+    expect(err?.message).toBe('1');
+    expect(res).toBeUndefined();
+  });
+});
+
+describe('tryCallbackFlatten 1', () => {
+  test('resolved', async () => {
+    const callbackFunction: CallbackFunction1<string, number> = (a, callback) => {
+      setTimeout(() => {
+        callback(null, 1);
+      });
+    };
+    const [err, res] = await tryCallback(callbackFunction, '');
+
+    if (err) {
+      assertError(err);
+      assertUndefined(res);
+    } else {
+      assertNull(err);
+      assertNumber(res);
+    }
+
+    expect(err).toBe(null);
+    expect(res).toBe(1);
+  });
+
+  test('rejected', async () => {
+    const callbackFunction: CallbackFunction1<string, number> = (a, callback) => {
+      setTimeout(() => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        callback(new Error('1'));
+      });
+    };
+    const [err, res] = await tryCallback(callbackFunction, '');
+
+    if (err) {
+      assertError(err);
+      assertUndefined(res);
+    } else {
+      assertNull(err);
+      assertNumber(res);
+    }
+
+    expect(err?.message).toBe('1');
+    expect(res).toBeUndefined();
+  });
+});
+
+describe('tryCallbackFlatten 2', () => {
+  test('resolved', async () => {
+    const callbackFunction: CallbackFunction2<string, 'b1' | 'b2', number> = (a, b, callback) => {
+      setTimeout(() => {
+        callback(null, 1);
+      });
+    };
+    const [err, res] = await tryCallback(callbackFunction, '', 'b1');
+
+    if (err) {
+      assertError(err);
+      assertUndefined(res);
+    } else {
+      assertNull(err);
+      assertNumber(res);
+    }
+
+    expect(err).toBe(null);
+    expect(res).toBe(1);
+  });
+
+  test('rejected', async () => {
+    const callbackFunction: CallbackFunction2<string, 'b1' | 'b2', number> = (a, b, callback) => {
+      setTimeout(() => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        callback(new Error('1'));
+      });
+    };
+    const [err, res] = await tryCallback(callbackFunction, '', 'b1');
 
     if (err) {
       assertError(err);
