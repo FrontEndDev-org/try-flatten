@@ -8,7 +8,7 @@ import type {
   CallbackFunction6,
 } from './callbackCurry';
 import { callbackCurry } from './callbackCurry';
-import { normalizeError } from './normalize-error';
+import { errorNormalize } from './errorNormalize';
 import type { FlattenReturn } from './types/return';
 
 export function tryCallback<T>(cf: CallbackFunction0<T>): Promise<FlattenReturn<T>>;
@@ -45,7 +45,7 @@ export function tryCallback(cf: any, ...args: any[]): Promise<FlattenReturn<any>
     // @ts-ignore
     callbackCurry.apply(this, [cf, ...args])((err, res) => {
       if (err) {
-        resolve([normalizeError(err), undefined] as const);
+        resolve([errorNormalize(err), undefined] as const);
       } else {
         resolve([null, res] as const);
       }
