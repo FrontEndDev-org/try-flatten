@@ -1,10 +1,10 @@
 import { describe, expect, test } from 'vitest';
-import { tryPromiseFlatten } from '../src';
+import { tryPromise } from '../src';
 import { assertError, assertNull, assertNumber, assertUndefined } from './helpers';
 
 describe('tryPromiseFlatten', () => {
   test('resolved', async () => {
-    const [err, res] = await tryPromiseFlatten(Promise.resolve(1));
+    const [err, res] = await tryPromise(Promise.resolve(1));
 
     if (err) {
       assertError(err);
@@ -19,7 +19,7 @@ describe('tryPromiseFlatten', () => {
   });
 
   test('rejected', async () => {
-    const [err, res] = await tryPromiseFlatten(Promise.reject(1));
+    const [err, res] = await tryPromise(Promise.reject(1));
 
     if (err) {
       assertError(err);

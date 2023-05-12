@@ -1,10 +1,10 @@
 import { describe, expect, test } from 'vitest';
-import { trySyncFlatten } from '../src';
+import { tryFunction } from '../src';
 import { assertError, assertNull, assertNumber, assertUndefined } from './helpers';
 
 describe('trySyncFlatten', () => {
   test('resolved', () => {
-    const [err, res] = trySyncFlatten(() => 1);
+    const [err, res] = tryFunction(() => 1);
 
     if (err) {
       assertError(err);
@@ -19,7 +19,7 @@ describe('trySyncFlatten', () => {
   });
 
   test('rejected', () => {
-    const [err, res] = trySyncFlatten(() => {
+    const [err, res] = tryFunction(() => {
       throw 1;
     });
 

@@ -6,13 +6,11 @@
 [![dependency-review](https://github.com/FrontEndDev-org/try-flatten/actions/workflows/dependency-review.yml/badge.svg)](https://github.com/FrontEndDev-org/try-flatten/actions/workflows/dependency-review.yml)
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/948a21cc839b431490dd8b8bf22628c3)](https://app.codacy.com/gh/FrontEndDev-org/try-flatten/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 [![Codacy Badge](https://app.codacy.com/project/badge/Coverage/948a21cc839b431490dd8b8bf22628c3)](https://app.codacy.com/gh/FrontEndDev-org/try-flatten/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_coverage)
-[![npm](https://img.shields.io/npm/v/try-flatten)](https://npmjs.com/package/try-flatten)
-[![release](https://img.shields.io/github/v/release/FrontEndDev-org/try-flatten)](https://github.com/FrontEndDev-org/try-flatten/releases)
+[![npm version](https://badge.fury.io/js/try-flatten.svg)](https://npmjs.com/package/try-flatten)
+
 
 # 为什么需要这个
-
 ## try-catch 块级作用域带来的问题
-
 先看一段代码：
 
 ```ts
@@ -64,8 +62,10 @@ if (res) {
 可以看到，由于块级作用域的特性，导致 res 的类型被”污染“了， 使用 try-flatten 后，你将可以用一种“扁平化”的方式调用 try-catch, 不用为了类型安全写一些冗余代码。
 
 ## 用上 `try-flatten` 后
-
 ```ts
+import { tryFlatten } from 'try-flatten';
+
+const somePromise = Promise.resolve({ prop: 'value' });
 const [err, res] = await tryFlatten(somePromise);
 
 // 只需要判断 err 是否存在即可
@@ -82,18 +82,23 @@ console.log(res.prop); // 'value'
 ```
 
 # 下载安装
-
 ```shell
 npm install try-flatten
 ```
 
 ## 在线试用
+[tryFlatten TypeScript Playground](https://amz.fun/NRh1L)
 
-[Playground Link](https://www.typescriptlang.org/zh/play?#code/JYWwDg9gTgLgBAbzjKBPAYgGwIYxgUwDs4BfOAMyghDgHIVUBacnPI2gbgCgv8APSLAoBXQgGMYwCMWwBnWflgA5YZkwAKAG7ZMw-AC44hVZgCUiLnDhR8MYVGLbd+OAF53Rk9xI9+g+OSiElIy8oowAKqEACb45MCE+NFaOnqGorHxidHmCJbWtvaOqS7urnAZcQlJ3r4C0AFBktJwcgqwAKJQVFApzoZdPbn5NnYOcE56cABk0xMlcAmyMNji+BDkcIPQtbz1QoHizaHtMCogAEaKfWmel4rDVqNFyKhg65uTpR60xvdQnC4Pj2-hERxCyHwy3UhGwIAMcGWUASAHMADSQ5YAYTkCPU5lcAD5WoRUI84GJpLIIJh8AA6TAQFHqehQySEFF0rm0DGw+GmbhWAjY3H43bCmAswAwKoBTa0Av4qAB1MeXB8W5iXkrJTCMs4ABtRRQDE2WQAXTcyDQWFwBEI6lVRLgAEYBTwrMBNuoDeSrG1wttel7BVZWmFYFFMtVksaXVYyPhMAoLMGQ6cVGpPd0Y8HfcphP91NGgz4SC6uBKWYA9tUAwDGK5VyVDiFUE9X5LU6sQ6TAXbBiADW6CaEPK6g7am7fcMGagA260DgAB9PGojVDDH8rlBmxMIMAcmqk8GFDAACqgdbCSX2lvJzWd8e9mEmDHOoOxrMkINt+D67or03m7AAHdsGAeAGCtNhbVHLse37QdpFLN0PS9A8fVDGB-SnLM0NOcMqmyAsoXfOB40TDVs3QtMNEDfIcPCc4N0I2R3yBUty1oAAFKgQGABQABlgF7fA61kBsxCbfdyK-PUDT-M1yiAkCwMtVgbXULjqF4+ljRpTR8HUZ1EMWZDM1QlM-VnANM1fcywxifCkiY4jSJcci6NzdMaOTHMzjzRjC3yYsXSAA)
 
-# 对同步函数的 try-flatten
+# 使用方法
+## 对同步函数的 try-flatten
 
 ```ts
+import { tryFunction, tryFlatten } from 'try-flatten';
+
+// 推荐使用 tryFunction
+const [err, res] = tryFunction(() => 1);
+// 与 tryFunction 同价
 const [err, res] = tryFlatten(() => 1);
 
 // 只需要判断 err 是否存在即可
@@ -109,12 +114,20 @@ console.log(err === null);
 console.log(res === 1);
 ```
 
-# 对回调函数的 try-flatten
+## 对回调函数的 try-flatten
+### 情况 1：没有入参
 
 ```ts
-const [err, res] = await tryFlatten((callback: (err: Error | null, res: number) => void) => {
-  callback(null, 1);
-});
+import { type Callback, tryCallback, tryFlatten } from 'try-flatten';
+
+const cf = (cb: Callback<number>) => {
+    cb(null, 1);
+};
+
+// 推荐使用 tryCallback
+const [err, res] = await tryCallback(cf);
+// 与 tryCallback 等价
+const [err, res] = await tryFlatten(cf);
 
 // 只需要判断 err 是否存在即可
 if (err) {
@@ -129,9 +142,40 @@ console.log(err === null);
 console.log(res === 1);
 ```
 
-# 对 PromiseLike 的 try-flatten
+### 情况 2：有其他入参
+```ts
+import { type Callback, callbackCurry, tryCallback, tryFlatten } from 'try-flatten';
+
+const cf = (a: number, b: number, cb: Callback<number>) => {
+  cb(null, a + b + 1);
+};
+
+// 推荐使用 tryCallback，不需要额外的 callbackCurry 辅助
+const [err, res] = await tryCallback(cf, 1, 2);
+// 与 tryCallback 等价
+const [err, res] = await tryFlatten(callbackCurry(cf, 1, 2));
+
+// 只需要判断 err 是否存在即可
+if (err) {
+  // 此处 err 类型为 Error，res 类型为 undefined
+  console.log(err instanceof Error);
+  console.log(res === undefined);
+  return;
+}
+
+// 此处 err 类型为 null，res 类型为 number
+console.log(err === null);
+console.log(res === 4);
+```
+
+## 对 PromiseLike 的 try-flatten
 
 ```ts
+import { tryPromise, tryFlatten } from 'try-flatten';
+
+// 推荐使用 tryPromise
+const [err, res] = await tryPromise(Promise.resolve(1));
+// 与 tryPromise 等价
 const [err, res] = await tryFlatten(Promise.resolve(1));
 
 // 只需要判断 err 是否存在即可
@@ -148,5 +192,4 @@ console.log(res === 1);
 ```
 
 # 启发
-
 - <https://www.npmjs.com/package/flatry>
