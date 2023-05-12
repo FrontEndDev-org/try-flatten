@@ -2,7 +2,7 @@ import type { CallbackFunction0 } from './callbackCurry';
 import { tryCallback } from './tryCallback';
 import { tryPromise } from './tryPromise';
 import { tryFunction, type SyncFunction } from './tryFunction';
-import type { FlattenReturn } from './types/return';
+import type { FlattenReturn } from './types';
 
 export type FlattenAble<T> = SyncFunction<T> | CallbackFunction0<T> | PromiseLike<T>;
 
