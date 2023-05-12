@@ -1,5 +1,5 @@
 import { errorNormalize } from './errorNormalize';
-import type { FlattenReturn } from './types/return';
+import type { FlattenReturn } from './types';
 
 export type SyncFunction<T> = () => T;
 

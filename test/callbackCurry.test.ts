@@ -1,8 +1,20 @@
-import { callbackCurry } from '../src/callbackCurry';
-import type { Callback } from '../src/callbackCurry';
+import { callbackCurry } from '../src';
+import type { Callback } from '../src';
 import { assertNumber } from './helpers';
 
-test('0', () => {
+test('0 input + 0 result', () => {
+  const cf = (cb: Callback) => {
+    cb(null);
+  };
+  const fn = vi.fn();
+  const cc = callbackCurry(cf);
+  cc((err, res) => {
+    fn(res);
+  });
+  expect(fn.mock.calls[0][0]).toBe(undefined);
+});
+
+test('0 input + 1 result', () => {
   const cf = (cb: Callback<number>) => {
     cb(null, 0);
   };
@@ -15,7 +27,19 @@ test('0', () => {
   expect(fn.mock.calls[0][0]).toBe(0);
 });
 
-test('1', async () => {
+test('1 input + 0 result', async () => {
+  const cf = (a: string, cb: Callback) => {
+    cb();
+  };
+  const fn = vi.fn();
+  const cc = callbackCurry(cf, '');
+  cc((err) => {
+    fn();
+  });
+  expect(fn.mock.calls[0][0]).toBe(undefined);
+});
+
+test('1 input + 1 result', async () => {
   const cf = (a: string, cb: Callback<number>) => {
     cb(null, 0);
   };
@@ -28,7 +52,19 @@ test('1', async () => {
   expect(fn.mock.calls[0][0]).toBe(0);
 });
 
-test('', async () => {
+test('2 input + 0 result', async () => {
+  const cf = (a: string, b: 'ba' | 'bb', cb: Callback) => {
+    cb(undefined);
+  };
+  const fn = vi.fn();
+  const cc = callbackCurry(cf, '', 'ba');
+  cc((err) => {
+    fn();
+  });
+  expect(fn.mock.calls[0][0]).toBe(undefined);
+});
+
+test('2 input + 1 result', async () => {
   const cf = (a: string, b: 'ba' | 'bb', cb: Callback<number>) => {
     cb(null, 0);
   };
