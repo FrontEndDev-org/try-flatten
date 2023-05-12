@@ -1,6 +1,6 @@
 {
   "name": "try-flatten",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "✈ 类型安全的扁平化的 try-catch，支持同步函数、回调函数和 PromiseLike",
   "scripts": {
     "prepare": "husky install",
