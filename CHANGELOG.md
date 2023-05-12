@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.2.0](https://github.com/FrontEndDev-org/try-flatten/compare/v1.1.0...v1.2.0) (2023-05-12)
+
+
+### Features
+
+* 增加 callbackCurry ([badc874](https://github.com/FrontEndDev-org/try-flatten/commit/badc8740c2df2126788487b82661207e44002ea5))
+
+
+### Bug Fixes
+
+* 增强 import 兼容性 ([3bca7f1](https://github.com/FrontEndDev-org/try-flatten/commit/3bca7f12f6f919ba08d29707a4a0da0373d4729c))
+
 ## [1.1.0](https://github.com/FrontEndDev-org/try-flatten/compare/v1.0.1...v1.1.0) (2023-04-01)
 
 
