@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/FrontEndDev-org/try-flatten/compare/v1.2.0...v1.3.0) (2023-05-12)
+
+
+### Features
+
+* callback 类型优化 ([bd577c7](https://github.com/FrontEndDev-org/try-flatten/commit/bd577c7a7c9da7212fd71f9643c13eba29126a78))
+
 ## [1.2.0](https://github.com/FrontEndDev-org/try-flatten/compare/v1.1.0...v1.2.0) (2023-05-12)
 
 
