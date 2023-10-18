@@ -22,6 +22,7 @@ jobs:
         with:
           release-type: node
           bump-minor-pre-major: true
+          default-branch: ${{ github.ref_name }}
 
   test-coverage:
     runs-on: ubuntu-latest
