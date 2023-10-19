@@ -86,9 +86,6 @@ console.log(res.prop); // 'value'
 npm install try-flatten
 ```
 
-## 在线试用
-[tryFlatten TypeScript Playground](https://amz.fun/NRh1L)
-
 
 # 使用方法
 ## 对同步函数的 try-flatten
