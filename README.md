@@ -63,7 +63,7 @@ if (res) {
 
 ## 用上 `try-flatten` 后
 
-[typeScript playground](https://l.ydr.me/jK6C64rW)
+[typeScript playground](https://l.ydr.me/chP1njdw)
 
 ```ts
 import { tryFlatten } from 'try-flatten';
