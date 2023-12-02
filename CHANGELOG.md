@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.1](https://github.com/FrontEndDev-org/try-flatten/compare/v1.3.0...v1.3.1) (2023-12-02)
+
+
+### Bug Fixes
+
+* 新增 typeScript playground ([ed1b149](https://github.com/FrontEndDev-org/try-flatten/commit/ed1b149e7c4a6640b34e3319bb842e404c780c1d))
+
 ## [1.3.0](https://github.com/FrontEndDev-org/try-flatten/compare/v1.2.0...v1.3.0) (2023-05-12)
 
 
