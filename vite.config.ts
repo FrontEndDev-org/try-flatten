@@ -1,4 +1,3 @@
-import { externalizeDeps } from 'vite-plugin-externalize-deps';
 import dts from 'vite-plugin-dts';
 import { defineConfig } from 'vitest/config';
 import pkg from './package.json';
@@ -10,7 +9,7 @@ import pkg from './package.json';
  * @ref https://vitest.dev/
  */
 export default defineConfig({
-  plugins: [externalizeDeps(), dts({})],
+  plugins: [dts({})],
   define: {
     PKG_NAME: JSON.stringify(pkg.name),
     PKG_VERSION: JSON.stringify(process.env.VITEST ? '0.0.0' : pkg.version),
