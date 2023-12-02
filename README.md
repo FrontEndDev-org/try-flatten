@@ -62,6 +62,9 @@ if (res) {
 可以看到，由于块级作用域的特性，导致 res 的类型被”污染“了， 使用 try-flatten 后，你将可以用一种“扁平化”的方式调用 try-catch, 不用为了类型安全写一些冗余代码。
 
 ## 用上 `try-flatten` 后
+
+[typeScript playground](https://l.ydr.me/jK6C64rW)
+
 ```ts
 import { tryFlatten } from 'try-flatten';
 
