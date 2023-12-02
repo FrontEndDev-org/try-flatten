@@ -76,12 +76,11 @@ if (err) {
   // 此处 err 类型为 Error，res 类型为 undefined
   console.log(err instanceof Error); // true
   console.log(res === undefined); // true
-  return;
+} else {
+  // 此处 err 类型为 null，res 类型为 Result
+  console.log(err === null); // true
+  console.log(res.prop); // 'value'
 }
-
-// 此处 err 类型为 null，res 类型为 Result
-console.log(err === null); // true
-console.log(res.prop); // 'value'
 ```
 
 # 下载安装
