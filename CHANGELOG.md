@@ -3,6 +3,18 @@
 ## [1.3.1](https://github.com/FrontEndDev-org/try-flatten/compare/v1.3.1...v1.3.1) (2023-12-02)
 
 
+### Bug Fixes
+
+* 触发新版本 ([c524c6f](https://github.com/FrontEndDev-org/try-flatten/commit/c524c6fecab178466d895198f6890d40e75060f8))
+
+
+### Miscellaneous Chores
+
+* release 1.3.1 ([c28df64](https://github.com/FrontEndDev-org/try-flatten/commit/c28df6415f9a62e616fd99b5f5af2cede1faca05))
+
+## [1.3.1](https://github.com/FrontEndDev-org/try-flatten/compare/v1.3.1...v1.3.1) (2023-12-02)
+
+
 ### Miscellaneous Chores
 
 * release 1.3.1 ([c28df64](https://github.com/FrontEndDev-org/try-flatten/commit/c28df6415f9a62e616fd99b5f5af2cede1faca05))
