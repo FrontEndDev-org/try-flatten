@@ -9,7 +9,9 @@ import pkg from './package.json';
  * @ref https://vitest.dev/
  */
 export default defineConfig({
-  plugins: [dts({})],
+  plugins: [dts({
+    include: 'src/**/*'
+  })],
   define: {
     PKG_NAME: JSON.stringify(pkg.name),
     PKG_VERSION: JSON.stringify(process.env.VITEST ? '0.0.0' : pkg.version),
@@ -20,7 +22,9 @@ export default defineConfig({
     copyPublicDir: false,
     reportCompressedSize: false,
     lib: {
-      entry: ['src/index.ts'],
+      entry: {
+        index: 'src/index.ts'
+      },
     },
     rollupOptions: {
       output: [
