@@ -8,14 +8,14 @@ export type FlattenAble<T> = SyncFunction<T> | CallbackFunction0<T> | PromiseLik
 
 export function tryFlatten<T>(flattenAble: SyncFunction<T>): FlattenReturn<T>;
 export function tryFlatten<T>(flattenAble: CallbackFunction0<T> | PromiseLike<T>): Promise<FlattenReturn<T>>;
-export function tryFlatten<T>(flattenAble: FlattenAble<T>): any {
-  if ('then' in flattenAble) {
-    return tryPromise<T>(flattenAble);
-  }
+export function tryFlatten<T>(flattenAble: FlattenAble<T>): unknown {
+    if ('then' in flattenAble) {
+        return tryPromise<T>(flattenAble);
+    }
 
-  if (flattenAble.length === 0) {
-    return tryFunction<T>(flattenAble as SyncFunction<T>);
-  }
+    if (flattenAble.length === 0) {
+        return tryFunction<T>(flattenAble as SyncFunction<T>);
+    }
 
-  return tryCallback<T>(flattenAble);
+    return tryCallback<T>(flattenAble);
 }
