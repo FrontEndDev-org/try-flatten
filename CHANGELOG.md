@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.2](https://github.com/FrontEndDev-org/try-flatten/compare/v1.3.1...v1.3.2) (2023-12-18)
+
+
+### Bug Fixes
+
+* 修复构建文件错误的问题 ([4eb2aff](https://github.com/FrontEndDev-org/try-flatten/commit/4eb2aff08b33d0e5f7c495f08f463010efd59ac1))
+
 ## [1.3.1](https://github.com/FrontEndDev-org/try-flatten/compare/v1.3.1...v1.3.1) (2023-12-02)
 
 
